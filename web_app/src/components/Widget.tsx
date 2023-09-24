@@ -2,7 +2,6 @@ import { ReactNode } from "react";
 import { useAppState } from "@/containers/App/app-state";
 import { updateProps } from "@/containers/App/update-props";
 
-import ButtonGroup from "@/components/ButtonGroup";
 import SimpleButton, { SimpleButtonGridProps } from "@/components/Button";
 import ImageWidget, { ImageGridProps } from "@/components/Image";
 import JoystickWidget, { JoystickWidgetGridProps } from "@/components/Joystick";
@@ -31,8 +30,6 @@ export default function Widget(props: WidgetProps): ReactNode | undefined {
   switch (props.name) {
     case "Button":
       return <SimpleButton {...newProps} />;
-    case "ButtonGroup":
-      return <ButtonGroup {...newProps} />;
     case "Image":
       return <ImageWidget {...newProps} />;
     case "Joystick":

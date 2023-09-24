@@ -29,7 +29,7 @@ def generate_launch_description():
             '/camera@sensor_msgs/msg/Image@gz.msgs.Image',
             '/camera_info@sensor_msgs/msg/CameraInfo@gz.msgs.CameraInfo',
             '/camera2@sensor_msgs/msg/Image@gz.msgs.Image',
-            '/model/simple_robot/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist',
+            '/cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist',
             '/model/simple_robot/odometry@nav_msgs/msg/Odometry@gz.msgs.Odometry',
         ],
         parameters=[{'qos_overrides./model/simple_robot.subscriber.reliability': 'reliable'}],

@@ -3,19 +3,14 @@ ui:
     - widget: Image
       props:
         topic: camera
-      layouts:
-        lg: { x: 5, y: 0, w: 3, h: 6 }
-        md: { x: 2, y: 0, w: 3, h: 6 }
-        sm: { x: 2, y: 0, w: 2, h: 4 }
-        xs: { x: 1, y: 0, w: 1, h: 2 }
-        xxs: { x: 0, y: 5, w: 2, h: 4 }
+      layout: { x: 0, y: 0, w: 2, h: 4 }
 
-#    - widget: Joystick
-#      props:
-#        on_change: ${on_change_joystick}
-#      layouts:
-#        lg: { x: 8, y: 1, w: 2, h: 4 }
-#        md: { x: 8, y: 2, w: 2, h: 4 }
-#        sm: { x: 2, y: 4, w: 2, h: 3 }
-#        xs: { x: 3, y: 0, w: 1, h: 4 }
-#        xxs: { x: 1, y: 1, w: 1, h: 4 }
+    - widget: Image
+      props:
+        topic: camera2
+      layout: { x: 2, y: 0, w: 2, h: 4 }
+
+    - widget: Joystick
+      props:
+        on_change: ${on_change_joystick}
+      layout: { x: 2, y: 4, w: 2, h: 4 }

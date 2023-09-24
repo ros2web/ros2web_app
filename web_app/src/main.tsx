@@ -3,7 +3,7 @@
 import ReactDOM from "react-dom/client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "@/styles/theme";
@@ -29,6 +29,15 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <ThemeProvider theme={theme}>
       <AppRoutes />
     </ThemeProvider>
-    <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>,
 );
+
+//
+// ReactDOM.createRoot(document.getElementById("root")!).render(
+//   <QueryClientProvider client={queryClient}>
+//     <ThemeProvider theme={theme}>
+//       <AppRoutes />
+//     </ThemeProvider>
+//     <ReactQueryDevtools initialIsOpen={false} />
+//   </QueryClientProvider>,
+// );

@@ -11,15 +11,15 @@ ui:
         xs: {x: 2, y: 0, w: 1, h: 2}
         xxs: {x: 1, y: 0, w: 1, h: 1}
 
-#    - widget: Image
-#      props:
-#        topic: camera
-#      layouts:
-#        lg: { x: 5, y: 0, w: 3, h: 6 }
-#        md: { x: 2, y: 0, w: 3, h: 6 }
-#        sm: { x: 2, y: 0, w: 2, h: 4 }
-#        xs: { x: 1, y: 0, w: 1, h: 2 }
-#        xxs: { x: 0, y: 5, w: 2, h: 4 }
+    - widget: Image
+      props:
+        topic: camera
+      layouts:
+        lg: { x: 5, y: 0, w: 3, h: 6 }
+        md: { x: 2, y: 0, w: 3, h: 6 }
+        sm: { x: 2, y: 0, w: 2, h: 4 }
+        xs: { x: 1, y: 0, w: 1, h: 2 }
+        xxs: { x: 0, y: 5, w: 2, h: 4 }
 
     - widget: Joystick
       props:

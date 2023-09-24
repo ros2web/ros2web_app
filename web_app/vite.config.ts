@@ -8,7 +8,14 @@ export default defineConfig({
     alias: [{ find: "@", replacement: "/src" }],
   },
   build: {
-    outDir: "../../ros2web_app/ros2web_app/data/public",
+    outDir: "../../ros2web_app/ros2web_app/ros2web_app/data/public",
+    rollupOptions: {
+      output: {
+        chunkFileNames: "plugin/app/js/[name]-[hash].js",
+        entryFileNames: "plugin/app/js/[name]-[hash].js",
+        assetFileNames: "plugin/app/[name]-[hash][extname]",
+      },
+    },
   },
   server: {
     proxy: {

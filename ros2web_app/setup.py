@@ -21,6 +21,7 @@ setup(
     entry_points={
         'ros2web.handler': [
             'web_rtc = ros2web_app.handler.web_rtc:WebRtcHandler',
+            'app = ros2web_app.handler.app:AppHandler',
         ],
         'ros2web.verb': [
             'create = ros2web_app.verb.create:CreateVerb',

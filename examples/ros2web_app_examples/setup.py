@@ -20,8 +20,9 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'button = ros2web_app_examples.button:main',
             'widgets = ros2web_app_examples.widgets:main',
+            'turtlesim_ctl = ros2web_app_examples.turtlesim:main',
+            'simple_robot = ros2web_app_examples.simple_robot:main',
         ],
     },
     package_data={

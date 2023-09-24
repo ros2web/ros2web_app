@@ -50,8 +50,8 @@ class AppBase(rclpy.node.Node):
         self.__app_state.on_open = self.on_open
         self.__app_state.on_close = self.on_close
 
-        with importlib.resources.path(self.__package_name, 'data') as file_path:
-            self.__public_directory = file_path.joinpath('public')
+        with importlib.resources.path('ros2web_app', 'data') as file_path:
+            self.__ros2web_app_directory = file_path.joinpath('public')
 
     def start(self):
         self.__app_state.create_services()
@@ -106,37 +106,20 @@ class AppBase(rclpy.node.Node):
         return response
 
     def __get_index(self, request: HTTP.Request, response: HTTP.Response):
-        self.__logger.debug(f'get_index: {request.path}')
+        self.__logger.info(f'get_index: {request.path}')
 
-        if self.__public_directory is None:
-            self.__logger.warning(f'The public directory does not exist.')
+        if self.__ros2web_app_directory is None:
+            self.__logger.warning(f'The ros2web_app directory does not exist.')
             response.status = HTTPStatusCode.HTTP_NOT_FOUND
             return response
 
-        path = request.path.replace(request.route, '')
-        file_match = re.match(r'/(?P<file_name>.+\.\w+)$', path)
-
-        if path == '' or path == '/':
-            file_name = 'index.html'
-        elif file_match is not None:
-            file_name = file_match.group('file_name')
-        else:
+        index_file_path = self.__ros2web_app_directory.joinpath('index.html')
+        if not os.path.exists(index_file_path):
+            self.__logger.warning(f"File does not exist. ({index_file_path})")
             response.status = HTTPStatusCode.HTTP_NOT_FOUND
             return response
 
-        index_file_path = self.__public_directory.joinpath(file_name)
-        base_path = pathlib.Path(self.__public_directory).resolve()
-        target_path = index_file_path.resolve()
-
-        if str(target_path).startswith(str(base_path)) is False:
-            self.__logger.warning(f'Invalid path. ({path})')
-            response.status = HTTPStatusCode.HTTP_NOT_FOUND
-            return response
-
-        if not os.path.exists(target_path):
-            self.__logger.warning(f"File does not exist. ({target_path})")
-            response.status = HTTPStatusCode.HTTP_NOT_FOUND
-            return response
-
-        response.file_path = str(target_path)
+        response.file_path = str(index_file_path)
         return response
+
+
