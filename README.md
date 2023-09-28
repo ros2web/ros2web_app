@@ -6,11 +6,7 @@
 of web applications through YAML configuration and the creation of ROS2 packages.
 
 
-
-
-
 [![Watch the video](https://img.youtube.com/vi/3-dwc0EN9TI/hqdefault.jpg)](https://www.youtube.com/embed/3-dwc0EN9TI)
-
 
 
 ## Installation
