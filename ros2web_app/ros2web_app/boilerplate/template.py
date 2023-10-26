@@ -30,28 +30,6 @@ class Package(NamedTuple):
     data: str
 
 
-def _create_web_files(*, package: Package):
-    with importlib.resources.path('ros2web_app', 'data') as path:
-        template_path = path.joinpath('template')
-
-    web_template_path = os.path.join(template_path, 'web')
-    web_template_web_ui_path = os.path.join(web_template_path, 'web_ui')
-    web_ui_path = os.path.join(package.path, 'web_ui')
-
-    shutil.copytree(web_template_web_ui_path, web_ui_path)
-
-    web_src_directory = os.path.join(web_ui_path, 'src')
-
-    _create_template_file(os.path.join(web_template_path, 'package.json.em'), web_ui_path,
-                          'package.json', {'package_name': package.name})
-
-    _create_template_file(os.path.join(web_template_path, 'app-config.js.em'),
-                          web_ui_path, 'app-config.js', {'package_name': package.name})
-
-    _create_template_file(os.path.join(web_template_path, 'define.ts.em'),
-                          web_src_directory, 'define.ts', {'package_name': package.name})
-
-
 def _create_python_files(*, package: Package, maintainer: Person):
     with importlib.resources.path('ros2web_app', 'data') as path:
         template_path = path.joinpath('template')
@@ -68,11 +46,11 @@ def _create_python_files(*, package: Package, maintainer: Person):
                               'maintainer_email': maintainer.email,
                               'maintainer_name': maintainer.name,
                               'package_license': package_license,
-                              'dependencies': [Dependency(dep) for dep in ['ros2web', 'ros2web_app', 'ros2web_std']],
+                              'dependencies': [Dependency(dep) for dep in ['ros2web', 'ros2web_app']],
                               'exports': [Export('build_type', content='ament_python')],
                           })
 
-    app_module = f'{package.name}.app:main'
+    app_module = f'{package.name}.{package.name}:main'
     _create_template_file(os.path.join(python_template_path, 'setup.py.em'), package.path,
                           'setup.py', {
                               'package_name': package.name,
@@ -94,9 +72,10 @@ def _create_python_files(*, package: Package, maintainer: Person):
     _create_template_file(os.path.join(python_template_path, '__init__.py.em'),
                           package.src, '__init__.py', {})
 
-    _create_template_file(os.path.join(python_template_path, 'app_base.py.em'),
+    app_file_name = f'{package.name}.py'
+    _create_template_file(os.path.join(python_template_path, 'app.py.em'),
                           package.src,
-                          'app_base.py', {
+                          app_file_name, {
                               'package_name': package.name
                           })
     _create_template_file(os.path.join(python_template_path, 'config.yml.em'),
@@ -154,7 +133,6 @@ def create_package(package_name: str, destination_directory):
 
         maintainer = _create_maintainer()
         _create_python_files(package=package, maintainer=maintainer)
-        _create_web_files(package=package)
 
         print(f'Successfully created {package_name}.')
     except Exception as e:

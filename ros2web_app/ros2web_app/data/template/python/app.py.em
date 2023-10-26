@@ -1,46 +1,46 @@
-import launch.logging
+import rclpy
+import rclpy.logging
 
+from ros2web_app.api import AppBase, AppEvent
 from std_msgs.msg import String
 
-from ros2web_app.utilities import open_yaml_file
-from ros2web_app.api import AppBase, AppEvent, AppState
+NODE_NAME = '@package_name'
 
-
-PKG_NAME = '@package_name'
-
-logger = launch.logging.get_logger(PKG_NAME)
 
 class App(AppBase):
-    
-    def __init__(self, package_name) -> None:
+
+    def __init__(self, app_name) -> None:
         init_state = {
-            'title': 'app',
-            'label': 'Hello World',
             'on_click': self.on_click,
+            'label': 'Hello World: 0',
         }
-        config = open_yaml_file(PKG_NAME, 'config.yml')
-        super().__init__(package_name=package_name, 
-                         init_state=init_state,
-                         config=config)
-        
-    def on_startup(self):
-        self.print_server_info()
+        super().__init__(app_name=app_name, init_state=init_state, config='config.yml')
+        self.__logger = rclpy.logging.get_logger(NODE_NAME)
         self.i = 0
-        self.publisher = self.ros_node.create_publisher(String, 'topic', 10)
-        
-    def on_shutdown(self):
-        self.ros_node.destroy_publisher(self.publisher)
-    
-    def on_click(self, event: AppEvent, state: AppState):
+        self.publisher = self.create_publisher(String, 'topic', 10)
+
+    def on_click(self, event: AppEvent):
         msg = String()
         msg.data = 'Hello World: %d' % self.i
-        self.publisher.publish(msg)
         self.i += 1
+        self.publisher.publish(msg)
         self.set_state({'label': msg.data})
 
+    def shutdown(self):
+        self.destroy_publisher(self.publisher)
+        super().shutdown()
+
+
 def main(args=None):
-    app = App(PKG_NAME)
-    app.run()
+    rclpy.init(args=args)
+
+    app = App(NODE_NAME)
+    app.start()
+    try:
+        rclpy.spin(app)
+    except KeyboardInterrupt:
+        pass
+    app.shutdown()
 
 if __name__ == '__main__':
     main()

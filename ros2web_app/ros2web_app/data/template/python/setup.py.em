@@ -19,7 +19,7 @@ setup(
     license='@package_license',
     entry_points={
         'console_scripts': [
-            'app = @app_module',
+            '@package_name = @app_module',
         ],
     },
     package_data={

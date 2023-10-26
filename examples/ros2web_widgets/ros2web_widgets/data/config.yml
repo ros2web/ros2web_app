@@ -96,8 +96,9 @@ ui:
         button_label: "Send"
         on_click: ${on_click_input_group}
       layouts:
-        lg: { x: 2, y: 4, w: 3, h: 3 }
-        md: { x: 5, y: 0, w: 3, h: 3 }
-        sm: { x: 0, y: 7, w: 2, h: 3 }
-        xs: { x: 1, y: 4, w: 2, h: 3 }
-        xxs: { x: 0, y: 11, w: 2, h: 3 }
+        lg: { x: 2, y: 4, w: 3, h: 4 }
+        md: { x: 5, y: 0, w: 3, h: 4 }
+        sm: { x: 0, y: 7, w: 2, h: 4 }
+        xs: { x: 1, y: 4, w: 2, h: 4 }
+        xxs: { x: 0, y: 11, w: 2, h: 4 }
+

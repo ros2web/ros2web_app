@@ -42,6 +42,8 @@ def main(args=None):
     rclpy.init(args=args)
 
     app = App(NODE_NAME)
+    app.start()
+
     try:
         rclpy.spin(app)
     except KeyboardInterrupt:

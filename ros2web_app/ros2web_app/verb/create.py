@@ -6,7 +6,7 @@ from importlib.metadata import metadata as setup_metadata
 from argparse import ArgumentParser
 from ros2web.verb import VerbExtension
 
-# from ..api.boilerplate import create_package
+from ..boilerplate import create_package
 
 
 class CreateVerb(VerbExtension):
@@ -23,6 +23,4 @@ class CreateVerb(VerbExtension):
             help='The package name')
 
     def main(self, *, args):
-        # TODO: not implemented yet
-        print('create')
-        # create_package(args.package_name, args.destination_directory)
+        create_package(args.package_name, args.destination_directory)

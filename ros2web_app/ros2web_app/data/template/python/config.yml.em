@@ -1,13 +1,7 @@
 ui:
-  base:
-    package_name: ros2web_std
-    name: Grid
-    props:
-      title: ${title}
-  layout:
-    grid:
-      - package_name: ros2web_std
-        name: Button
-        props:
-          label: ${label}
-          on_click: ${on_click}
+  grid:
+    - widget: Button
+      props:
+        label: ${label}
+        on_click: ${on_click}
+      layout: { x: 0, y: 0, w: 2, h: 1 }

@@ -17,7 +17,6 @@ class App(AppBase):
             'on_change_switch': self.on_change_switch,
             'on_change_input': self.on_change_input,
             'on_change_input_group': self.on_change_input_group,
-
             'list_labels': ["item1", "item2", "item3", "item4", "item5"],
             'list_selected': 2,
             'slider_value': 10,
@@ -25,7 +24,7 @@ class App(AppBase):
             'input_value': 'Hello, World!',
             'on_click_input': self.on_click_input,
             'input_group_items': [
-                {'label': 'label1', 'value': 'Hello, World!', 'type': 'text'},
+                {'label': 'label1', 'value': 'Hello', 'type': 'text'},
                 {'label': 'label2', 'value': 10, 'type': 'number'},
                 {'label': 'label3', 'value': '', 'type': 'text'},
                 {'label': 'label4', 'value': '', 'type': 'text'},
@@ -34,7 +33,7 @@ class App(AppBase):
             ],
             'on_click_input_group': self.on_click_input_group,
         }
-        super().__init__(app_name=app_name, init_state=init_state, config='widgets.yml')
+        super().__init__(app_name=app_name, init_state=init_state, config='config.yml')
         self.__logger = rclpy.logging.get_logger(NODE_NAME)
 
     def start(self):
